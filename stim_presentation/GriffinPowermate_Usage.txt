@@ -1,0 +1,111 @@
+How to use Griffin PowerMate Dial with PsychoPy:
+Created by Ilkay Isik
+November 2016
+
+
+Here is the documentation on how to get response from Griffin Powermate dial
+if you are programming your experiment with Psychopy.
+Unfortunately this is only for windows.
+
+Go to this link (https://github.com/ofgulban/griffin-powermate)and download
+the library.
+This script uses a python library (pywinusb.hid) to talk to any usb device. This library needs to be in PsychoPy2/Lib/site-packages [https://github.com/rene-aguirre/pywinusb]
+
+In short what it does is;
+* It defines a class called GriffinPowermate which can:
+    *  find the power mate dial you plugged in using the HidDeviceFilter from
+       the pywinusb library.
+    *  and listen to its activity.
+
+Data format:
+It spits out some numbers in a format like this when you include the function
+raw listener in your script :
+data = [0, button_status, move, 0, bright, pulse_status, pulse_value]
+They all correspond to a different event
+button_status: is there a click or not
+move is about the rotation. It gives a value between 1 and 255. if the dial is
+turned right the value is 1 or above (depending on how fast you turn)
+if the dial is turned left the value is 255 or below.
+Move is probably the most important response type you want to record.
+
+
+Usage:
+What you have to do is put this script in the same directory where your
+experiment script sits and also import the class from the library in the
+beginning of your script :
+
+* “from griffin_powermate import GriffinPowermate”
+
+------------------------------------------------------------------------------
+
+Here are two examples on how to use it in your script:
+
+EXAMPLE 1: uses only the rotation (move)
+
+"""Test Griffin Powermate library."""
+
+from griffin_powermate import GriffinPowermate
+
+def rotation_listener(data):
+    """Print powermate input only for rotation."""
+    if data[2] > 127:
+        print data[2] - 256
+    else:
+        print data[2]
+
+
+devices = GriffinPowermate.find_all()
+
+# use the first powermate available
+powermate = devices[0]
+powermate.open()
+powermate.on_event('raw', rotation_listener)
+
+# set the light (0 - 255)
+powermate.set_brightness(0)
+
+while True:
+    x = 1
+
+powermate.close()
+win.close()
+
+------------------------------------------------------------------------------
+
+EXAMPLE 2: uses rotation and click
+"""Test Griffin Powermate library."""
+
+import numpy as np
+from griffin_powermate import GriffinPowermate
+
+
+out = []
+dial_click = False
+
+def rotation_listener(data):
+    """Print powermate input only for rotation and click."""
+    global dial_click
+    if data[1] == 1 :
+        dial_click = True
+    elif data[2] > 127:
+        out.append(data[2] - 256)
+    else:
+        out.append(data[2])
+
+
+devices = GriffinPowermate.find_all()
+
+# use the first powermate available
+powermate = devices[0]
+powermate.open()
+powermate.on_event('raw', rotation_listener)
+
+# set the light (0 - 255)
+powermate.set_brightness(0)
+
+while dial_click is False:
+    x = 1
+
+print np.sum(out)
+
+powermate.close()

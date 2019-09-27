@@ -8,7 +8,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 # %% set paths and load the data
 fd_cont = '/Users/ilkay.isik/aesthetic_dynamics/data/df_continuous_rate.csv'
-savepath = '/Users/ilkay.isik/aesthetic_dynamics/output/'
+savepath = '/Users/ilkay.isik/aesthetic_dynamics/output/figures/'
 # %% Some params
 nr_sub = 25
 nr_dnc_mov = 15
@@ -84,8 +84,8 @@ for s in range(sub_to_plot):
     plt.ylim((-1.2, 1.2))
     plt.suptitle('Landscape')
     sname = savepath + 'Fig03_A_Lscp.pdf'
-    # plt.savefig(sname, dpi=300)
-    # plt.close()
+    plt.savefig(sname, dpi=300)
+    plt.close()
 
 # %% Create plots for each movie
 movs_to_plot = 1, 16
@@ -103,5 +103,5 @@ for i, m in enumerate(movs_to_plot):
     plt.ylim((-1.2, 1.2))
     plt.suptitle(titles[i])
     sname = savepath + 'Fig03_B_' + titles[i] + '.pdf'
-    # plt.savefig(sname, dpi=300)
-    # plt.close()
+    plt.savefig(sname, dpi=300)
+    plt.close()

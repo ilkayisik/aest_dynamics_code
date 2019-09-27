@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 """
 Mean-minus-one agreement calculations  with overall data
-- saves: mm1_overall.csv
+- saves: 
+mm1_overall.csv
 Fig06_A_Rate_mm1Agreement_Overall.pdf
 Fig06_A_View_mm1Agreement_Overall.pdf
 @author: ilkay isik
@@ -85,7 +86,6 @@ for i in range(nr_cats):
     cat = cats[i]
     ov_mean_dict[cat + '-rate-retest'] = [mean_rort]
     ov_ci_dict[cat + '-rate-retest'] = [ci_rort[0], ci_rort[1]]
-
     temp_df_rort = pd.DataFrame({'mm1_corr': corr_rort,
                                  'ztrans_mm1': corr_ztrans,
                                  'category': [cats[i]] * int(nr_sub_r),
@@ -138,7 +138,7 @@ frames_o = [mm1_odf_rate, mm1_odf_view]
 mm1_odf = pd.concat(frames_o)
 
 save_mm1_overall = savepath + 'data/mm1_overall.csv'
-# mm1_odf.to_csv(save_mm1_overall)
+mm1_odf.to_csv(save_mm1_overall)
 #%% PLOTS for MM1 correlations with OVERALL DATA
 # Rate Plot
 flatui = ["#F8766D", "#00BFC4"]
@@ -198,9 +198,8 @@ for i in range(nr_sub, nr_sub+nr_sub_r):
              color='gray', lw=0.5, linestyle='--' )
 # add 0 line
 ax.axhline(y=0,  color='k', linestyle='--')
-fname1 = savepath + '/output/Fig06_A_Rate_mm1Agreement_Overall.pdf'
-# plt.savefig(fname1, dpi=900)
-
+fname1 = savepath + '/output/figures/Fig06_A_Rate_mm1Agreement_Overall.pdf'
+plt.savefig(fname1, dpi=900)
 #%% Overall MM1 View Plot
 # view: dance-test, dance-retest, lscp-test,  lscp-retest
 view_means = [0.4037880787387486, 0.42392020718843665, 0.5040671428688499, 0.5421497491984216 ]
@@ -251,5 +250,5 @@ for i in range(nr_sub, nr_sub+nr_sub_v):
     
 # add 0 line
 ax.axhline(y=0,  color='k', linestyle='--')
-fname2 = savepath + 'output/Fig06_A_View_mm1Agreement_Overall.pdf'
-# plt.savefig(fname2, dpi=900)
+fname2 = savepath + 'output/figues/Fig06_A_View_mm1Agreement_Overall.pdf'
+plt.savefig(fname2, dpi=900)

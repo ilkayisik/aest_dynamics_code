@@ -43,7 +43,7 @@ timeC = data[0]['cTime_ses1']
 cTime = timeC[0, 0, :]
 nr_tp = len(cTime)
 # %% create data frames for overall data for BP03 and BP04
-group = ['rate', 'view']
+group = ['Rate', 'View']
 group_frames = []
 # Place the overall data in a data frame for two sessions
 for exp in range(len(data)):
@@ -95,7 +95,7 @@ for exp in range(len(data)):
     # save the dataframe for one group
     print ('Saving the overall rating dataframe for ' + group[exp] + ' Group')
     save_overall = savepath + 'df_overall_' + group[exp] + '.csv'
-    # df_o.to_csv(save_overall)
+    df_o.to_csv(save_overall)
     group_frames.append(df_o)
 
 # combine data: rate and view
@@ -146,7 +146,7 @@ df_cont = df_cont.rename(columns={"index": "Sub_comb"})
 
 print ('Saving the continuous rating dataframe for Rate Group')
 save_cont = savepath + 'df_continuous_rate.csv'
-# df_cont.to_csv(save_cont)
+df_cont.to_csv(save_cont)
 
 # View, session 2 (only has continuous data for session 2)
 df_c = pd.DataFrame()
@@ -167,7 +167,7 @@ df_c = df_c.rename(columns={"index": "Sub_comb"})
 
 print ('Saving the continuous dataframe for View Group')
 save_cont = savepath + 'df_continuous_view.csv'
-# df_c.to_csv(save_cont)
+df_c.to_csv(save_cont)
 
 # combine the dataframes from BP03 BP04 continuous data
 df_cont = pd.concat([df_cont, df_c])
@@ -176,6 +176,6 @@ df_cont = df_cont.loc[:, ~df_cont.columns.str.contains('^index')]
 # %% write out to csv
 print('Saving combined dataframes')
 save_overall = savepath + 'df_overall.csv'
-# df_overall.to_csv(save_overall, index=False)
+df_overall.to_csv(save_overall, index=False)
 save_cont = savepath+'df_continuous.csv'
-# df_cont.to_csv(save_cont)
+df_cont.to_csv(save_cont)

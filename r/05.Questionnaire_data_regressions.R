@@ -81,9 +81,11 @@ ggplot(df_rmsd_retest_) +
 odata.mr <- lm(odata_mean ~ panas_pos + panas_neg + shaps +
                  stai_s + stai_t + area_tot, data=df_mean)
 summary(odata.mr)
-# print out the coefficients # standardized betas and Ci's were added to that table using excel
-coefs<-xtable(coef(summary(odata.mr)),digits=c(2,2,2,2,2))
-print.xtable(coefs, type="html", file="output/mreg_results_questionnaire-meanoveralldata.html")
+# print out the coefficients 
+# standardized betas and Ci's were added to that table using excel
+# with the calculations below
+coefs<-xtable(coef(summary(odata.mr)),digits=c(3,3,3,3,3))
+print.xtable(coefs, type="html", file="output/tables/S3.Table_mreg_results_questionnaire-meanoveralldata.html")
 
 # standardized betas
 # reporting this in the manuscript:
@@ -97,8 +99,10 @@ cinfs <- xtable(confint(odata.mr),digits=c(2,2,2))
 rmsd.mr <- lm(mean_rmsd_rt ~  panas_pos + panas_neg + shaps +
                 stai_s + stai_t + area_tot, data=df_rmsd_retest)
 
-coefs2<-xtable(coef(summary(rmsd.mr)),digits=c(2,2,2,2,2))
-print.xtable(coefs2, type="html", file="output/mreg_results_questionnaire-meanrmsd.html")
+coefs2<-xtable(coef(summary(rmsd.mr)),digits=c(3,3,3,3,3))
+# print out the coefficients
+# standardized betas and Ci's were added to that table using excel
+print.xtable(coefs2, type="html", file="output/tables/S4.Table_mreg_results_questionnaire-meanrmsd.html")
 summary(rmsd.mr)
 lm.beta(rmsd.mr)
 # cinf2 <- xtable(confint(rmsd.mr),digits=c(2,2,2))
@@ -107,7 +111,6 @@ lm.beta(rmsd.mr)
 ##########################################################################################
 # Relationship between observers??? self-reported category preferences and overall ratings
 ##### LSCP ##### 
-
 vars_lsp <- c("lsp_like", "lsp_int", "odata_mean_lsp",  "mean_rmsd_lsp_rt")
 df_lsp <- mydata[vars_lsp]
 # mean overall data
@@ -131,7 +134,7 @@ summary(lsp_odata_md <- lm(odata_mean_lsp ~ lsp_like, data=df_lsp)) # sig
 lm.beta(lsp_odata_md)
 # mean rmsd
 summary(lsp_rmsd_md <- lm(mean_rmsd_lsp_rt ~ lsp_like, data=df_lsp)) # sig
-
+lm.beta(lsp_rmsd_md)
 ##### DANCE ##### 
 vars_dnc<- c("dnc_like", "dnc_int", "odata_mean_dnc",  "mean_rmsd_dnc_rt")
 df_dnc <- mydata[vars_dnc]
@@ -152,9 +155,8 @@ ggplot(df_dnc_) +
 # linear regression
 # build linear regression model on full data
 summary(dnc_odata_md <- lm(odata_mean_dnc ~ dnc_like, data=df_dnc)) # sig
+lm.beta(dnc_odata_md)
 summary(dnc_odata_md_int <- lm(odata_mean_dnc ~ dnc_int, data=df_dnc)) # nonsig
 # mean rmsd
 summary(dnc_rmsd_md <- lm(mean_rmsd_dnc_rt ~ dnc_like, data=df_dnc)) #nonsig
-summary(dnc_rmsd_md_i <- lm(mean_rmsd_dnc_rt ~ dnc_int, data=df_dnc)) #nonsig
-
 

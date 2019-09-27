@@ -11,15 +11,15 @@ import math
 import numpy as np
 # %% set paths  and  load the data
 filedir = '/Users/ilkay.isik/aesthetic_dynamics/data/df_overall.csv'         
-savepath = '/Users/ilkay.isik/aesthetic_dynamics/output/'
+savepath = '/Users/ilkay.isik/aesthetic_dynamics/output/figures/'
 # %% create several dataframes for different comparisons
 # main dataframe
 df = pd.read_csv(filedir, sep=',', )
 df.loc[df['category'] == 'D', 'category'] = 'Dance'
 df.loc[df['category'] == 'L', 'category'] = 'Landscape'
 # for rate and view
-df_rate = df.loc[df['group'] == 'rate']
-df_view = df.loc[df['group'] == 'view']
+df_rate = df.loc[df['group'] == 'Rate']
+df_view = df.loc[df['group'] == 'View']
 
 # take means per subject
 df1 = df_rate.groupby(['subject', 'category', 'session'], as_index=False)['oData'].mean()
@@ -150,6 +150,5 @@ ax.scatter(x4, df2_stats['mean'][2], marker="d", s=msize, facecolor='k')
 # add 0 line
 ax.axhline(y=0,  color='k', linestyle='--')
 plt.tight_layout()
-
 savename = savepath + 'Fig02_overall_rating_plot.pdf'
-# plt.savefig(savename, dpi=900)
+plt.savefig(savename, dpi=900)

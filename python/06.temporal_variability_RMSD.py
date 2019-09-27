@@ -137,7 +137,7 @@ df_rmsd = pd.concat(frames)
 
 # save it
 save_df_rmsd = savepath + 'data/df_rmsd_values.csv'
-# df_rmsd.to_csv(save_df_rmsd , index=None)
+df_rmsd.to_csv(save_df_rmsd , index=None)
 # %% Simulate time series to compare to real rmsd values
 # curve with no change [with zero values]
 c_no_change = np.zeros([300])
@@ -227,8 +227,8 @@ ax[2].axvline(sim_vals['exp_change'], color='r', linestyle='--')
 ax[2].set_xlabel('Average RMSD values')
 
 plt.tight_layout()
-fname = savepath + 'output/Fig05_A_MeanRMSD_TestRetest_RateView' + '.pdf'
-# plt.savefig(fname, dpi=900)
+fname = savepath + 'output/figures/Fig05_A_MeanRMSD_TestRetest_RateView' + '.pdf'
+plt.savefig(fname, dpi=900)
 
 #%% ########################## K-MEANS CLUSTERING  ############################ 
 rmsd_dnc = rmsd_vals[:, :15, :]
@@ -259,9 +259,7 @@ silh_scores, mean_silh_scores = [], []
 clust = []
 for s in cSize:
     clust_mea = {}
-    # clust_gp['name'] = group_names[idx]
     print('Cluster size is: ', str(s))
-    # print ("Cluster size is,", str(s))
     km = KMeans(n_clusters=s, init='k-means++', n_init=clustRep, 
                 algorithm="auto",)
     km.fit(rmsd)
@@ -329,5 +327,5 @@ ax.set_ylim([0, 0.06])
 ax.set_title("The visualization of the clustered data with rmsd scores")
 ax.set_xlabel("Dance")
 ax.set_ylabel("Landscape")
-# plt.savefig(savepath + 'output/Fig05-C_clusters_with_rmsd.pdf', dpi=300)
+plt.savefig(savepath + 'output/figures/Fig05-C_clusters_with_rmsd.pdf', dpi=300)
 

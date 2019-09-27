@@ -11,7 +11,7 @@ library(MuMIn) # for the rsquared
 library(lsmeans)
 library(xtable)
 library(ggplot2)
-# library(lattice)
+library(lattice)
 
 ############### STEP 1: Load the data and organize the data frame ###############
 df_rmsd <- read_delim("data/df_rmsd_values.csv", delim=",")
@@ -116,13 +116,17 @@ qqnorm(residuals(retest.M2))
 hist(residuals(retest.M2)) 
 tab_model(retest.M2, show.se = TRUE, show.stat = TRUE, show.icc=TRUE, show.obs = FALSE,
           string.stat = "t", rm.terms = TRUE, digits = 3
-          #,file="temporal_variation/rmsd/LMM/rmsd_retest_lmm_result_table_withtabmodel.html"
+          ,file="output/tables/Table2.rmsd_retest_lmm_result_table_withtabmodel.html"
           )
 tukey <- as.data.frame(summary(lsmeans(retest.M2, pairwise~Group*Category, adjust="tukey"))$contrasts)
 tukey$df <- NULL
 tukey<-xtable(tukey,digits=c(3,3,3,3,3,4))
-print.xtable(tukey, type="html", file="output/rmsd_retest_lmm_tukey_table.html", include.rownames = FALSE)
+print.xtable(tukey, type="html", file="output/tables/rmsd_retest_lmm_tukey_table.html", include.rownames = FALSE)
 difflsmeans(retest.M2, test.effs="Category:Group")
+
+
+
+
 
 # trying to make sense of this interaction
 # interaction plot
@@ -148,7 +152,7 @@ int_plot = ezPlot(
   split_lab = 'Group') + theme_bw() + theme(legend.position = c(0.15, 0.8)) +
   theme(legend.title=element_blank()) + ylab("log-transformed rmsd scores")
 
-fname = "output/rmsd_retest_interaction_plot_results.tiff"
+fname = "output/figures/rmsd_retest_interaction_plot_results.tiff"
 tiff(fname, units="in", width=3.5, height=3, res=300)
 print(int_plot)
 dev.off()
@@ -164,6 +168,8 @@ names(retest.M2.ranef[[2]]) <- c("Movie")
 trellis.device(color = FALSE) # set to black and white
 dotplot(retest.M2.ranef, layout=c(3, 1), scales = list(x = list(relation = 'free', rot=0), 
                                                        y=list()), strip = TRUE)[[1]][c(1,2)]
+
+
 
 trellis.device(color = FALSE) # set to black and white
 dotplot(retest.M2.ranef, layout=c(3, 1), scales = list(x = list(relation = 'same', rot=0), 

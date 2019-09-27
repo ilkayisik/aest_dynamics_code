@@ -78,13 +78,11 @@ anova(M0, M1, M3) # M2 is a better model
 # keep the coefs as a table
 tab_model(M2, show.se = TRUE, show.stat = TRUE, show.obs = FALSE,
           string.stat = "t", digits = 3
-          ,file="output/S2Table_Continous_MM1_lmm_result_table_tabmodel.html"
+          ,file="output/tables/S2.Table_Continous_MM1_lmm_result_table_tabmodel.html"
 )
 
 # coefs<-xtable(coef(summary(M2)))
 # print.xtable(coefs, type="html", file="output/ContData_MM1_LMM_coefs.html")
-
-
 
 
 

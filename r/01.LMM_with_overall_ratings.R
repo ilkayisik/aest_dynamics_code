@@ -1,28 +1,20 @@
 # Linear Mixed Effects analysis with overall ratings
 rm(list=ls()) # clear working directory
 # set working directory
-setwd ("/Users/ilkay.isik/Desktop/aesthetic_dynamics/data")
+setwd ("/Users/ilkay.isik/aesthetic_dynamics/")
 # load libararies
 library(readr)
 library(MASS)
 library(lme4)
+library(RePsychLing)
 library(lmerTest)
 library(xtable)
 library(sjPlot)
 library(lsmeans)
 
-if (!require("RePsychLing")) {
-  devtools::install_github("dmbates/RePsychLing") # github
-  library(RePsychLing)
-}
-
-# library(ggplot2)
-# library(lattice)
-# library(lsr)
-
 ############### STEP 1: Load the data and organize the data frame ############### 
 # load data 
-overall_data <- read_delim("df_overall.csv", delim=";") 
+overall_data <- read_delim("data/df_overall.csv", delim=",") 
 # Change the name of session values test -> Test..
 overall_data$session[overall_data$session == "test"] <- "Test"
 overall_data$session[overall_data$session == "retest"] <- "Retest"
@@ -92,11 +84,11 @@ hist(residuals(M2))
 # to write out the results as html table
 tab_model(M2, show.se = TRUE, show.stat = TRUE, show.icc=TRUE, show.obs = FALSE,
 string.stat = "t", rm.terms = TRUE, digits = 3
-, file="odata_lmm_result_table.html"
+, file="output/tables/Table1.odata_lmm_result_table.html"
 )
 # keep the coefs as a table
 coefs<-xtable(coef(summary(M2)))
-print.xtable(coefs, type="html", file="OverallData_LMM_coefs.html")
+print.xtable(coefs, type="html", file="output/tables/odata_lmm_coefs.html")
 # Breakdown the category main effect 
 lsmeans(M2, pairwise~category, adjust="tukey")
 

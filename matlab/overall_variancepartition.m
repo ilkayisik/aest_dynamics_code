@@ -1,6 +1,6 @@
-root = '/Users/ilkay.isik/Desktop/aesthetic_dynamics/';
+root = '/Users/ilkay.isik/aesthetic_dynamics/';
 cd(root)
-addpath('/Users/ilkay.isik/Desktop/aesthetic_dynamics/aest_dynamics_code/matlab/');
+addpath('/Users/ilkay.isik/aesthetic_dynamics/aest_dynamics_code/matlab/');
 rate_path = 'data/data_rate.mat';
 view_path = 'data/data_view.mat';
 
@@ -63,7 +63,7 @@ for q = 1:nQ
     set(ph2{q}(3),'FaceColor',1 - fCol(2,:) .* (1-qColMask(q,:)));
     
 end
- 
+
 
 % Figure 6 (C): Only for 'SR' & 'IR'
 % Color settings: 
@@ -87,4 +87,6 @@ for q = 1:nQ
     set(ph2{q}(1),'FaceColor', 1 - fCol(1, :) .* (1-qColMask(q,:)));
     set(ph2{q}(3),'FaceColor', 1 - fCol(2, :) .* (1-qColMask(q,:)));
     title(qNames(q));
- end
+end
+
+saveas(gcf,'/Users/ilkay.isik/aesthetic_dynamics/output/figures/Fig_06_C_varpar.pdf')

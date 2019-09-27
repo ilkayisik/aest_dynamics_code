@@ -82,7 +82,7 @@ anova(M1, M2)
 ########################  S1 table ########################  
 tab_model(M2, show.se = TRUE, show.stat = TRUE, show.obs = FALSE,
           string.stat = "t", digits = 3
-          ,file="output/LMM_MM1Overall_Coefs_M2_tabmodel.html"
+          ,file="output/tables/S1.Table_LMM_MM1Overall_Coefs_M2_tabmodel.html"
 )
 # break down significant interaction
 lsmeans(M2, pairwise~session*group, adjust="tukey")  # test rate vs retest rate: different
@@ -91,7 +91,11 @@ lsmeans(M2, pairwise~session*group, adjust="tukey")  # test rate vs retest rate:
 tukey <- as.data.frame(summary(lsmeans(M2, pairwise~session*group, adjust="tukey"))$contrasts)
 tukey$df <- NULL
 tukey<-xtable(tukey,digits=c(3,3,3,3,3,4))
-print.xtable(tukey, type="html", file="output/LMM_MM1Overall_TukeyComparisons_M2.html", include.rownames = FALSE)
+print.xtable(tukey, type="html", file="output/tables/S1.Table_Interaction_LMM_MM1Overall_TukeyComparisons_M2.html", include.rownames = FALSE)
+
+
+
+
 
 
 

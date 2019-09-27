@@ -65,7 +65,7 @@ pr_means[:, 0] = ztor(np.nanmean(rtoz(pr_r_vals[:, 0:15]), axis=1))
 # median and mean r per participant for lsp
 pr_meds[:, 1] = ztor(np.nanmedian(rtoz(pr_r_vals[:, 15:]), axis=1))
 pr_means[:, 1] = ztor(np.nanmean(rtoz(pr_r_vals[:, 15:]), axis=1))
-# Wilcoxon test across categories
+# Wilcoxon test across categories: REPORTED IN THE MS
 wilcoxon(pr_means[:, 0], pr_means[:, 1])
 wilcoxon(pr_meds[:, 0], pr_meds[:, 1])
 # mean of the medians
@@ -185,8 +185,10 @@ wilcoxon(l2_ov_norm[:, 2], l2_ov_norm[:, 3])
 
 # For dance
 corr1 = pearsonr(l2_ov_norm[:, 0], l2_meds[:,0])[0]
+sig1 = pearsonr(l2_ov_norm[:, 0], l2_meds[:,0])[1]
 # For lscp
 corr2 = pearsonr(l2_ov_norm[:, 1], l2_meds[:,1])[0]
+sig2 = pearsonr(l2_ov_norm[:, 1], l2_meds[:,1])[1]
 # %% Reliability PLOT: Figure 4
 prvalstp, l2valstp = pr_means, l2_means # tp: to plot
 flatui = ["#F8766D", "#00BFC4"]
@@ -237,8 +239,8 @@ plt.text(-0.2, 1.1, "(D)", fontsize=12,
 plt.legend(loc=4)
 sns.despine()
 
-fname = savepath + 'Fig04_Reliability_Pearson_and_L2_histmeans' + '.pdf'
-# plt.savefig(fname, dpi=300)
+fname = savepath + 'figures/Fig04_Reliability_Pearson_and_L2_histmeans' + '.pdf'
+plt.savefig(fname, dpi=300)
 # %%  SUPPLEMENTARY FIGURE: BOX PLOTS 
 # Boxplots per person: For Dance and Landscape Continuous reliability values
 # To do it with seaborn: Create a data frame with the lad scores
@@ -277,8 +279,8 @@ for i, box in enumerate(ax.artists):
         box.set_edgecolor(flatui[1])
     box.set_facecolor('white')
 sns.despine()
-savename = savepath + 'S1Fig_Part01_Boxplot_ContinousRel_PearsonCorr.pdf'
-# plt.savefig(savename, dpi=300)
+savename = savepath + 'figures/S1Fig_A_Boxplot_ContinousRel_PearsonCorr.pdf'
+plt.savefig(savename, dpi=300)
 
 # SUPPLEMENTARY FIGURE Cont.: BOX PLOT with L2 values
 dnc_vals = l2_vals_norm[:, 0:15].T
@@ -316,5 +318,5 @@ for i, box in enumerate(ax.artists):
         box.set_edgecolor(flatui[1])
     box.set_facecolor('white')
 sns.despine()
-savename = savepath + 'S1Fig_Part02_Boxplot_ContinousRel_L2norm.pdf'
-# plt.savefig(savename, dpi=300)
+savename = savepath + 'figures/S1Fig_B_Boxplot_ContinousRel_L2norm.pdf'
+plt.savefig(savename, dpi=300)

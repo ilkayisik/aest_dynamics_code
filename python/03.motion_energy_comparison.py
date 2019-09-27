@@ -36,4 +36,4 @@ ttest_ind(egy_dnc_med, egy_lsp_med)
 ttest_ind(egy_dnc_mean,egy_lsp_mean)
 # not t test but kolmogorox smirnov?
 ks_2samp(egy_dnc_med, egy_lsp_med)
-ks_2samp(egy_dnc_mean, egy_lsp_mean) # this is what is reported in the ms
+x = ks_2samp(egy_dnc_mean, egy_lsp_mean) # this is what is reported in the ms

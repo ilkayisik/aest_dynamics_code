@@ -139,7 +139,7 @@ mm1_cdf_view['group'] = 'View'
 frames_c = [mm1_cdf_rate, mm1_cdf_view]
 mm1_cdf = pd.concat(frames_c)
 save_mm1_cont = savepath + 'data/mm1_continuous.csv'
-# mm1_cdf.to_csv(save_mm1_cont, index=None)
+mm1_cdf.to_csv(save_mm1_cont, index=None)
 # %% get the mean values calculated for each subject
 # Rate-test
 mean_rct_sub, ci_rct_sub = [], []
@@ -227,7 +227,7 @@ submean_mm1_cdf_view = df_vcrt_sub_mean
 frames = [submean_mm1_cdf_rate, submean_mm1_cdf_view]
 mm1_sub_means = pd.concat(frames)
 save_mm1_sub_means = savepath + 'data/mm1_continuous_submeans.csv'
-# mm1_sub_means.to_csv(save_mm1_sub_means, index=None)
+mm1_sub_means.to_csv(save_mm1_sub_means, index=None)
 # %% get the mean values calculated for each MOVIE
 # Rate test
 mean_rct_mov, ci_rct_mov = [], []
@@ -322,7 +322,7 @@ movmean_mm1_cdf_view = df_vcrt_mov_mean
 frames = [movmean_mm1_cdf_rate, movmean_mm1_cdf_view ]
 mm1_mov_means = pd.concat(frames)
 save_mm1_mov_means = savepath + 'data/mm1_continous_movmeans.csv'
-# mm1_mov_means.to_csv(save_mm1_mov_means, index=None)
+mm1_mov_means.to_csv(save_mm1_mov_means, index=None)
 # %% Calculate means and CI's to use in the plots: SUBJECT BASED
 # Rate: dance-test, lscp-test, dance-retest, lscp-retest
 rate_sub_means = []
@@ -411,8 +411,9 @@ for i in range(nr_sub, nr_sub+nr_sub_r):
 # add 0 line
 ax.axhline(y=0,  color='k', linestyle='--')
 
-fname1 = savepath + 'output/Fig06_B_Rate_mm1Agreement_Continous.pdf'
-# plt.savefig(fname1)
+fname1 = savepath + 'output/figures/Fig06_B_Rate_mm1Agreement_Continous.pdf'
+plt.savefig(fname1)
+plt.close()
 # %%View Plot
 sns.set_style('white')
 sns.set_context('paper',font_scale=2 )
@@ -438,8 +439,8 @@ plt.ylim((-0.6, 1))
 ax.plot([0.005, 0.005], [view_ci_lo[0], view_ci_up[0]], 'k-', lw=2)
 ax.plot([1.017, 1.017], [view_ci_lo[1], view_ci_up[1]], 'k-', lw=2)
 
-ax.scatter(0.005, view_sub_means[0], marker="d", s=100, facecolor='k')
-ax.scatter(1.017, view_sub_means[1], marker="d", s=100, facecolor='k')
+ax.scatter(0.005, view_sub_means[0], marker="d", s=200, facecolor='k')
+ax.scatter(1.017, view_sub_means[1], marker="d", s=200, facecolor='k')
 
 x_coords = []
 y_coords = []
@@ -456,5 +457,6 @@ for i in range(nr_sub_v):
 # add 0 line
 ax.axhline(y=0,  color='k', linestyle='--')
 
-fname2 = savepath + 'output/Fig06_B_View_mm1Agreement_Continous.pdf'
-# plt.savefig(fname2, dpi=900)
+fname2 = savepath + 'output/figures/Fig06_B_View_mm1Agreement_Continous.pdf'
+plt.savefig(fname2, dpi=900)
+plt.close()

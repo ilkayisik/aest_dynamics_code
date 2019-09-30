@@ -115,12 +115,12 @@ summary(rePCA(retest.M2)) # model is not degenerate
 qqnorm(residuals(retest.M2))
 hist(residuals(retest.M2)) 
 tab_model(retest.M2, show.se = TRUE, show.stat = TRUE, show.icc=TRUE, show.obs = FALSE,
-          string.stat = "t", rm.terms = TRUE, digits = 3
+          string.stat = "t", rm.terms = TRUE, digits = 2
           ,file="output/tables/Table2.rmsd_retest_lmm_result_table_withtabmodel.html"
           )
 tukey <- as.data.frame(summary(lsmeans(retest.M2, pairwise~Group*Category, adjust="tukey"))$contrasts)
 tukey$df <- NULL
-tukey<-xtable(tukey,digits=c(3,3,3,3,3,4))
+tukey<-xtable(tukey,digits=c(2,2,2,2,2,3))
 print.xtable(tukey, type="html", file="output/tables/rmsd_retest_lmm_tukey_table.html", include.rownames = FALSE)
 difflsmeans(retest.M2, test.effs="Category:Group")
 

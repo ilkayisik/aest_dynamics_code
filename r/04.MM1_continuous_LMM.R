@@ -1,6 +1,6 @@
 rm(list=ls()) # clear working directory
 # set working directory
-setwd ("/Users/ilkay.isik/Desktop/aesthetic_dynamics/")
+setwd ("/Users/ilkay.isik/aesthetic_dynamics/")
 library(readr)
 library(ggplot2)
 library(MASS)
@@ -76,9 +76,9 @@ anova(M0, M1, M3) # M2 is a better model
 
 ################## S2 Table ###############
 # keep the coefs as a table
-tab_model(M2, show.se = TRUE, show.stat = TRUE, show.obs = FALSE,
-          string.stat = "t", digits = 3
-          ,file="output/tables/S2.Table_Continous_MM1_lmm_result_table_tabmodel.html"
+tab_model(M2, show.se=TRUE, show.stat=TRUE, show.obs=FALSE,
+          string.stat="t", digits=2
+          ,file="output/tables/S2.Table_Continuous_MM1_lmm_result_table_tabmodel.html"
 )
 
 # coefs<-xtable(coef(summary(M2)))

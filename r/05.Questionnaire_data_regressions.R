@@ -1,6 +1,6 @@
 rm(list=ls()) # clear working directory
 # set working directory
-setwd ("/Users/ilkay.isik/Desktop/aesthetic_dynamics/")
+setwd ("/Users/ilkay.isik/aesthetic_dynamics/")
 #################### LOAD LIBRARIES ####################
 library(readr)
 require(ggplot2)
@@ -132,6 +132,7 @@ ggplot(df_lsp_) +
 # build linear regression model on full data
 summary(lsp_odata_md <- lm(odata_mean_lsp ~ lsp_like, data=df_lsp)) # sig
 lm.beta(lsp_odata_md)
+
 # mean rmsd
 summary(lsp_rmsd_md <- lm(mean_rmsd_lsp_rt ~ lsp_like, data=df_lsp)) # sig
 lm.beta(lsp_rmsd_md)
@@ -156,7 +157,7 @@ ggplot(df_dnc_) +
 # build linear regression model on full data
 summary(dnc_odata_md <- lm(odata_mean_dnc ~ dnc_like, data=df_dnc)) # sig
 lm.beta(dnc_odata_md)
-summary(dnc_odata_md_int <- lm(odata_mean_dnc ~ dnc_int, data=df_dnc)) # nonsig
+
 # mean rmsd
 summary(dnc_rmsd_md <- lm(mean_rmsd_dnc_rt ~ dnc_like, data=df_dnc)) #nonsig
-
+lm.beta(dnc_rmsd_md)

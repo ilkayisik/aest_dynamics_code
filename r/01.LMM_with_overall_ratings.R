@@ -82,17 +82,17 @@ hist(residuals(M2))
 
 # Going on with M2
 # to write out the results as html table
-tab_model(M2, show.se = TRUE, show.stat = TRUE, show.icc=TRUE, show.obs = FALSE,
-string.stat = "t", rm.terms = TRUE, digits = 3
-, file="output/tables/Table1.odata_lmm_result_table.html"
+tab_model(M2, show.se=TRUE, show.stat=TRUE, show.icc=TRUE, show.obs=FALSE,
+string.stat="t", rm.terms=TRUE, digits=2
+,file="output/tables/Table1.odata_lmm_result_table.html"
 )
 # keep the coefs as a table
-coefs<-xtable(coef(summary(M2)))
-print.xtable(coefs, type="html", file="output/tables/odata_lmm_coefs.html")
-# Breakdown the category main effect 
-lsmeans(M2, pairwise~category, adjust="tukey")
+# coefs<-xtable(coef(summary(M2)))
+# print.xtable(coefs, type="html", file="output/tables/odata_lmm_coefs.html")
 
-tukey <- as.data.frame(summary(lsmeans(M2, pairwise~category, adjust="tukey"))$contrasts)
-tukey$df <- NULL
-tukey<-xtable(tukey,digits=c(3,3,3,3,3,4))
-print.xtable(tukey, type="html", file="tukey_Category_MainEffect.html", include.rownames = FALSE)
+#lsmeans(M2, pairwise~category, adjust="tukey")
+
+#tukey <- as.data.frame(summary(lsmeans(M2, pairwise~category, adjust="tukey"))$contrasts)
+#tukey$df <- NULL
+#tukey<-xtable(tukey,digits=c(2,2,2,2,2,3))
+# print.xtable(tukey, type="html", file="tukey_Category_MainEffect.html", include.rownames = FALSE)

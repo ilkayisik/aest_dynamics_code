@@ -81,7 +81,7 @@ anova(M1, M2)
 # print.xtable(coefs, type="html", file="output/LMM_MM1Overall_Coefs_M2.html")
 ########################  S1 table ########################  
 tab_model(M2, show.se = TRUE, show.stat = TRUE, show.obs = FALSE,
-          string.stat = "t", digits = 3
+          string.stat = "t", digits = 2
           ,file="output/tables/S1.Table_LMM_MM1Overall_Coefs_M2_tabmodel.html"
 )
 # break down significant interaction
@@ -90,7 +90,7 @@ lsmeans(M2, pairwise~session*group, adjust="tukey")  # test rate vs retest rate:
 # export tukey results as html
 tukey <- as.data.frame(summary(lsmeans(M2, pairwise~session*group, adjust="tukey"))$contrasts)
 tukey$df <- NULL
-tukey<-xtable(tukey,digits=c(3,3,3,3,3,4))
+tukey<-xtable(tukey,digits=c(2,2,2,2,2,3))
 print.xtable(tukey, type="html", file="output/tables/S1.Table_Interaction_LMM_MM1Overall_TukeyComparisons_M2.html", include.rownames = FALSE)
 
 
@@ -126,7 +126,7 @@ effects <- ezANOVA(data=ov_mm1,
                    wid = .(sub), 
                    within=.(category, session), 
                    between=.(group))$ANOVA
-effects <- xtable(effects, digits=c(3,3,3,3,3,3,3,3))
+effects <- xtable(effects, digits=c(2,2,2,2,2,2,2,2))
 # print.xtable(effects, type="html", file="output/mm1_overallrating_ANOVA.html", include.rownames = FALSE)
 
 
@@ -188,7 +188,7 @@ effects <- ezANOVA(data=rate,
                    dv = .(ztrans_mm1), 
                    wid = .(sub), 
                    within=.(category, session))$ANOVA
-effects <- xtable(effects,  digits=c(3,3,3,3,3,3,3,3))
+effects <- xtable(effects,  digits=c(2,2,2,2,2,2,2,3))
 
 # print.xtable(effects, type="html", file="output/mm1_overallrating_ANOVA_Rate.html", include.rownames = FALSE)
 
@@ -201,6 +201,6 @@ effects <- ezANOVA(data=view,
                    dv = .(ztrans_mm1), 
                    wid = .(subCode), 
                    within=.(category, session))$ANOVA
-effects <- xtable(effects,  digits=c(3,3,3,3,3,3,3,3))
-print.xtable(effects, type="html", file="mm1_overallrating_ANOVA_View.html", include.rownames = FALSE)
+effects <- xtable(effects,  digits=c(2,2,2,2,2,2,2,3))
+#print.xtable(effects, type="html", file="mm1_overallrating_ANOVA_View.html", include.rownames = FALSE)
 agg <- aggregate(mm1_corr~category+group+session,mean, data=ov_mm1)

@@ -12,5 +12,5 @@ R is used for statistical analyses.
 
 Matlab is used for motion energy analysis and variance decomposition analysis.
 
-The code and the data is also accessible through OSF:
+The code and the data are also accessible through OSF:
 https://osf.io/tpxmk/
